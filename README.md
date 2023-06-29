@@ -1,5 +1,7 @@
 # sn1ppets
 
+:warning: https://0x46.net/thoughts/2019/04/27/piping-curl-to-shell/ :warning:
+
 ## debian_package_upgrade.sh
 
 ```bash
