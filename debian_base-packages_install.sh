@@ -2,6 +2,6 @@
 
 echo "Starting..."
 
-apt-get --yes zsh imagemagick ffmpeg install zip unzip rar unrar ripgrep asciinema tmux git curl neovim detox
+apt-get --yes install zsh imagemagick ffmpeg zip unzip rar unrar ripgrep asciinema tmux git curl neovim detox
 
 echo "Done!"
