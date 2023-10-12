@@ -1,0 +1,23 @@
+---
+root: true
+rules:
+  no-use-before-define:
+    - 2
+  max-len:
+    - 2
+    - 140
+env:
+  es6: true
+  browser: true
+  commonjs: true
+  node: true
+parser: "@typescript-eslint/parser"
+plugins:
+  - "@typescript-eslint"
+extends:
+  - eslint:recommended
+  - plugin:@typescript-eslint/recommended
+  - prettier
+globals:
+  Atomics: readonly
+  SharedArrayBuffer: readonly

@@ -1,0 +1,37 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "Frontend part with Tailwind CSS of the gowebly project.",
+  "scripts": {
+    "build:dev": "bunx tailwindcss -i ./assets/styles.css -o ./static/styles.css",
+    "build:prod": "bunx tailwindcss -i ./assets/styles.css -o ./static/styles.css -m"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-brands-svg-icons": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "feather-icons": "^4.29.1",
+    "hack-font": "^3.3.0",
+    "spinkit": "^2.0.1",
+    "typewriter-effect": "^2.20.1"
+  },
+  "devDependencies": {
+    "@types/postcss-import": "^14.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
+    "@typescript-eslint/parser": "^6.7.0",
+    "autoprefixer": "^10.4.15",
+    "eslint": "^8.49.0",
+    "eslint-config-prettier": "^9.0.0",
+    "marked": "^9.0.0",
+    "postcss": "^8.4.29",
+    "postcss-import": "^15.1.0",
+    "postcss-nested": "^6.0.1",
+    "prettier": "3.0.3",
+    "stylelint": "^15.10.3",
+    "stylelint-config-standard": "^34.0.0",
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.2.2",
+    "vite": "^4.4.9"
+  }
+}

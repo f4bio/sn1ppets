@@ -19,3 +19,9 @@ curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/debian_base-pac
 ```bash
 curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/fix_permissions.sh | sudo bash
 ```
+
+## init_project.sh
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/init_project.sh | sudo bash
+```
