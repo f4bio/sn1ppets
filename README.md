@@ -1,6 +1,20 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [sn1ppets](#sn1ppets)
+  - [debian_package_upgrade.sh](#debian_package_upgradesh)
+  - [debian_base-packages_install.sh](#debian_base-packages_installsh)
+  - [fix_permissions.sh](#fix_permissionssh)
+  - [init_project.sh](#init_projectsh)
+  - [asdf_install_all_latest.sh](#asdf_install_all_latestsh)
+  - [asdf_global_all_latest.sh](#asdf_global_all_latestsh)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # sn1ppets
 
-:warning: https://0x46.net/thoughts/2019/04/27/piping-curl-to-shell/ :warning:
+:warning: <https://0x46.net/thoughts/2019/04/27/piping-curl-to-shell/> :warning:
 
 ## debian_package_upgrade.sh
 
@@ -23,17 +37,17 @@ curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/fix_permissions
 ## init_project.sh
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/init_project.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/init_project.sh | bash
 ```
 
 ## asdf_install_all_latest.sh
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/asdf_install_all_latest.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/asdf_install_all_latest.sh | bash
 ```
 
 ## asdf_global_all_latest.sh
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/asdf_global_all_latest.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/asdf_global_all_latest.sh | bash
 ```

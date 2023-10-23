@@ -1,17 +1,25 @@
 #!/bin/bash
 
-echo "Starting..."
+## script-commons:
+scriptsCommonUtilities=$(mktemp)
+curl -fsSL -o "$scriptsCommonUtilities" https://gitlab.com/bertrand-benoit/scripts-common/-/raw/master/utilities.sh
+. "$scriptsCommonUtilities"
+BSC_VERBOSE=1
+## :script-commons
 
-if ! command -v fd &> /dev/null
-then
-    echo "`fd` could not be found; https://github.com/sharkdp/fd"
-    exit 1
-fi
+info "=== === ==="
+info "Starting..."
+info "=== === ==="
 
-# find $(pwd) -type f -exec chmod 644 "{}" \;
-fd --type f --exec chmod 644 {}
-# find $(pwd) -type d -exec chmod 755 "{}" \;
-fd --type d --exec chmod 755 {}
+checkBin find || errorMessage "This snippet requires find. Install it please, and then run this tool again."
+
+
+find $(pwd) -type f -exec chmod 644 "{}" \;
+# fd --type f --exec chmod 644 {}
+find $(pwd) -type d -exec chmod 755 "{}" \;
+# fd --type d --exec chmod 755 {}
 chown -R $SUDO_UID:$SUDO_GID $(pwd)
 
-echo "Done!"
+info "=== === ==="
+info "Done!"
+info "=== === ==="
