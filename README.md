@@ -25,3 +25,15 @@ curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/fix_permissions
 ```bash
 curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/init_project.sh | sudo bash
 ```
+
+## asdf_install_all_latest.sh
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/asdf_install_all_latest.sh | sudo bash
+```
+
+## asdf_global_all_latest.sh
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/asdf_global_all_latest.sh | sudo bash
+```
