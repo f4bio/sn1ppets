@@ -1,7 +1,9 @@
+# sn1ppets
+
+:warning: <https://0x46.net/thoughts/2019/04/27/piping-curl-to-shell/> :warning:
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
 - [sn1ppets](#sn1ppets)
   - [debian_package_upgrade.sh](#debian_package_upgradesh)
   - [debian_base-packages_install.sh](#debian_base-packages_installsh)
@@ -11,10 +13,6 @@
   - [asdf_global_all_latest.sh](#asdf_global_all_latestsh)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-# sn1ppets
-
-:warning: <https://0x46.net/thoughts/2019/04/27/piping-curl-to-shell/> :warning:
 
 ## debian_package_upgrade.sh
 
