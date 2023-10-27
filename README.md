@@ -2,6 +2,8 @@
 
 :warning: <https://0x46.net/thoughts/2019/04/27/piping-curl-to-shell/> :warning:
 
+---
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 - [sn1ppets](#sn1ppets)
@@ -13,6 +15,8 @@
   - [asdf_global_all_latest.sh](#asdf_global_all_latestsh)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+---
 
 ## debian_package_upgrade.sh
 
