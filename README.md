@@ -53,3 +53,9 @@ curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/asdf_install_al
 ```bash
 curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/asdf_global_all_latest.sh | bash
 ```
+
+## github_delete_workflow_runs.sh
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/github_delete_workflow_runs.sh | bash
+```
