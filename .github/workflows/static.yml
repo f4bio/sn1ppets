@@ -30,11 +30,7 @@ jobs:
       - uses: actions/jekyll-build-pages@v1
         with:
           source: ./docs
-          destination: ./docs/_site
       - uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./docs/_site
-
   # Deployment job
   deploy:
     environment:
