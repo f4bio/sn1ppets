@@ -1,8 +1,6 @@
 ---
-permalink: /
+title: "sn1ppets"
 ---
-
-# sn1ppets
 
 ## debian_package_upgrade.sh
 
