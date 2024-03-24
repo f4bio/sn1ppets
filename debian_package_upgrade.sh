@@ -9,15 +9,17 @@ BSC_VERBOSE=1
 
 checkBin apt-get || errorMessage "This snippet requires apt-get. Install it please, and then run this tool again."
 
-info "=== === ==="
-info "Starting..."
-info "=== === ==="
+info "\nStarting...\n"
 
-apt-get --yes update
-apt-get --yes full-upgrade
-apt-get --yes autoclean
-apt-get --yes autoremove
+export NEEDRESTART_MODE=auto
 
-info "=== === ==="
-info "Done!"
-info "=== === ==="
+apt-get --yes --quiet update
+info "Update Done...\n"
+apt-get --yes --quiet full-upgrade
+info "Full Upgrade Done...\n"
+apt-get --yes --quiet autoclean
+info "Autoclean Done...\n"
+apt-get --yes --quiet autoremove
+info "Autoremove Done...\n"
+
+info "\nAll Done!\n"
