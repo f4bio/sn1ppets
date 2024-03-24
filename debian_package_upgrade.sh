@@ -15,12 +15,12 @@ info "Starting..."
 export NEEDRESTART_MODE=auto
 
 apt-get --yes --quiet update >> /tmp/debian_package_upgrade.log
-debug "Update Done..."
+info "Update Done... (1/4)"
 apt-get --yes --quiet full-upgrade >> /tmp/debian_package_upgrade.log
-debug "Full Upgrade Done..."
+info "Full Upgrade Done... (2/4)"
 apt-get --yes --quiet autoclean >> /tmp/debian_package_upgrade.log
-debug "Autoclean Done..."
+info "Autoclean Done... (3/4)"
 apt-get --yes --quiet autoremove >> /tmp/debian_package_upgrade.log
-debug "Autoremove Done..."
+info "Autoremove Done... (4/4)"
 
 info "All Done!"
