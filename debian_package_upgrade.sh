@@ -8,18 +8,19 @@ BSC_VERBOSE=1
 ## :script-commons
 
 checkBin apt-get || errorMessage "This snippet requires apt-get. Install it please, and then run this tool again."
+echo "" > /tmp/debian_package_upgrade.log
 
-info "\nStarting...\n"
+info "Starting..."
 
 export NEEDRESTART_MODE=auto
 
-apt-get --yes --quiet update
-info "Update Done...\n"
-apt-get --yes --quiet full-upgrade
-info "Full Upgrade Done...\n"
-apt-get --yes --quiet autoclean
-info "Autoclean Done...\n"
-apt-get --yes --quiet autoremove
-info "Autoremove Done...\n"
+apt-get --yes --quiet update >> /tmp/debian_package_upgrade.log
+debug "Update Done..."
+apt-get --yes --quiet full-upgrade >> /tmp/debian_package_upgrade.log
+debug "Full Upgrade Done..."
+apt-get --yes --quiet autoclean >> /tmp/debian_package_upgrade.log
+debug "Autoclean Done..."
+apt-get --yes --quiet autoremove >> /tmp/debian_package_upgrade.log
+debug "Autoremove Done..."
 
-info "\nAll Done!\n"
+info "All Done!"
