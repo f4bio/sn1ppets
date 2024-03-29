@@ -12,7 +12,7 @@ echo "" > /tmp/debian_package_upgrade.log
 
 info "Starting..."
 
-export NEEDRESTART_MODE=auto
+export NEEDRESTART_MODE=a
 
 apt-get --yes --quiet update >> /tmp/debian_package_upgrade.log
 info "Update Done... (1/4)"
