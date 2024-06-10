@@ -7,19 +7,20 @@ curl -fsSL -o "$scriptsCommonUtilities" https://gitlab.com/bertrand-benoit/scrip
 BSC_VERBOSE=1
 ## :script-commons
 
-info "=== === ==="
-info "Starting..."
-info "=== === ==="
-
 checkBin find || errorMessage "This snippet requires find. Install it please, and then run this tool again."
+echo "" > /tmp/fix_permissions.log
 
+info "Starting..."
 
-find $(pwd) -type f -exec chmod 644 "{}" \;
-# fd --type f --exec chmod 644 {}
-find $(pwd) -type d -exec chmod 755 "{}" \;
-# fd --type d --exec chmod 755 {}
-chown -R $SUDO_UID:$SUDO_GID $(pwd)
+export NEEDRESTART_MODE=a
 
-info "=== === ==="
-info "Done!"
-info "=== === ==="
+find $(pwd) -type f -exec chmod 644 "{}" \; >> /tmp/fix_permissions.log
+info "Files-644 Done... (1/4)"
+find $(pwd) -type d -exec chmod 755 "{}" \; >> /tmp/fix_permissions.log
+info "Directories-755 Done... (2/4)"
+chown -R $SUDO_UID:$SUDO_GID $(pwd) >> /tmp/fix_permissions.log
+info "Chown-R Done... (3/4)"
+sync >> /tmp/fix_permissions.log
+info "Sync Done... (4/4)"
+
+info "All Done!"
