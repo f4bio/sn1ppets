@@ -8,13 +8,13 @@ BSC_VERBOSE=1
 ## :script-commons
 
 checkBin apt-get || errorMessage "This snippet requires apt-get. Install it please, and then run this tool again."
+echo "" > /tmp/debian_base-packages_install.log
 
-info "=== === ==="
 info "Starting..."
-info "=== === ==="
 
-apt-get --yes install zsh imagemagick ffmpeg zip unzip rar unrar ripgrep asciinema tmux git curl neovim detox
+export NEEDRESTART_MODE=a
 
-info "=== === ==="
-info "Done!"
-info "=== === ==="
+apt-get --yes --quiet install zsh imagemagick ffmpeg zip unzip rar unrar ripgrep asciinema tmux git curl neovim detox >> /tmp/debian_base-packages_install.log
+info "Install Done... (1/1)"
+
+info "All Done!"
