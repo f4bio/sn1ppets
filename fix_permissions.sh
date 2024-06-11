@@ -7,7 +7,7 @@ curl -fsSL -o "$scriptsCommonUtilities" https://gitlab.com/bertrand-benoit/scrip
 BSC_VERBOSE=1
 ## :script-commons
 
-checkBin find || errorMessage "This snippet requires find. Install it please, and then run this tool again."
+checkBin fdfind || errorMessage "This snippet requires fdfind. Install it please, and then run this tool again."
 echo "" > /tmp/fix_permissions.log
 
 info "Starting..."
