@@ -15,10 +15,10 @@ info "Starting..."
 export NEEDRESTART_MODE=a
 
 #find $(pwd) -type f -exec chmod o+rw,g+r,o+r "{}" \; >> /tmp/fix_permissions.log
-fdfind --type file --exec chmod o+rw,g+r,o+r >> /tmp/fix_permissions.log
+fdfind --type file --exec chmod o+r,g+r,u+rw >> /tmp/fix_permissions.log
 info "Files-644 Done... (1/4)"
 #find $(pwd) -type d -exec chmod 755 "{}" \; >> /tmp/fix_permissions.log
-fdfind --type directory --exec chmod o+rwx,g+rx,o+rx >> /tmp/fix_permissions.log
+fdfind --type directory --exec chmod o+rx,g+rx,u+rwx >> /tmp/fix_permissions.log
 info "Directories-755 Done... (2/4)"
 chown -R $SUDO_UID:$SUDO_GID $(pwd) >> /tmp/fix_permissions.log
 info "Chown-R Done... (3/4)"
