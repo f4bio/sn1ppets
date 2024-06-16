@@ -9,7 +9,7 @@ BSC_VERBOSE=1
 
 checkBin apt-get || errorMessage "This snippet requires apt-get. Install it please, and then run this tool again."
 
-runDateTime=$(getFormattedDatetime '%Y-%m-%d-%H-%M-%S' )
+runDateTime=$(getFormattedDatetime '%Y-%m-%d-%H-%M-%S')
 echo "---" > /tmp/debian_package_upgrade.log
 echo "$runDateTime" >> /tmp/debian_package_upgrade.log
 echo "---" >> /tmp/debian_package_upgrade.log
