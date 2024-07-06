@@ -14,7 +14,7 @@ info "Starting..."
 
 export NEEDRESTART_MODE=a
 
-apt-get --yes --quiet install zsh imagemagick ffmpeg zip unzip rar unrar ripgrep asciinema tmux git curl neovim detox >> /tmp/debian_base-packages_install.log
+apt-get --yes --quiet install zsh autojump imagemagick ffmpeg zip unzip rar unrar ripgrep asciinema tmux git curl neovim detox >> /tmp/debian_base-packages_install.log
 info "Install Done... (1/1)"
 
 info "All Done!"
