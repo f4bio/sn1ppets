@@ -17,6 +17,7 @@ echo "---" >> /tmp/debian_package_upgrade.log
 info "Starting..."
 
 export NEEDRESTART_MODE=a
+export DEBIAN_FRONTEND=noninteractive
 
 apt-get --yes --quiet update 2> /tmp/debian_package_upgrade.log
 info "Update Done... (1/4)"
