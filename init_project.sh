@@ -9,9 +9,7 @@ BSC_VERBOSE=1
 
 checkBin curl || errorMessage "This snippet requires curl. Install it please, and then run this tool again."
 
-info "=== === ==="
 info "Starting..."
-info "=== === ==="
 
 fileNames=(
     "dot_commitlintrc.yml"
@@ -43,6 +41,4 @@ for f in $fileNames; do
     getURLContents $remoteUrl $localName
 done
 
-info "=== === ==="
-info "Done!"
-info "=== === ==="
+info "All Done!"

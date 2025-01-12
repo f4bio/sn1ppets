@@ -59,3 +59,9 @@ curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/asdf_global_all
 ```bash
 curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/github_delete_workflow_runs.sh | bash
 ```
+
+## ufw_fetch_application-profile.sh
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/ufw_fetch_application-profiles.sh | bash
+```
