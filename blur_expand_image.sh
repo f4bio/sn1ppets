@@ -3,11 +3,12 @@
 ## script-commons:
 scriptsCommonUtilities=$(mktemp)
 curl -fsSL -o "$scriptsCommonUtilities" https://gitlab.com/bertrand-benoit/scripts-common/-/raw/master/utilities.sh
-. "$scriptsCommonUtilities"
+source "$scriptsCommonUtilities"
 BSC_VERBOSE=1
 ## :script-commons
 
 checkBin magick || errorMessage "This snippet requires imagemagick. Install it please, and then run this tool again."
+checkBin bc || errorMessage "This snippet requires bc. Install it please, and then run this tool again."
 
 filesDone=0
 dimension="1920x1080"
@@ -28,7 +29,7 @@ for currentFile in *."$extensions"; do
 		"$currentFile" -geometry "$dimension" -gravity center -composite \
 		"$outFile.$outFileExtension"
 	filesDone=$((filesDone+1))
-	percentDone=$((filesDone/filesCount*100))
+	percentDone=$(echo "$filesDone / $filesCount * 100" | bc -l)
 	echo "$percentDone% done ($filesDone of $filesCount files)"
 	mv "$currentFile" "_originals/$currentFile"
 done
