@@ -11,7 +11,7 @@ checkBin magick || errorMessage "This snippet requires imagemagick. Install it p
 
 filesDone=0
 dimension="1920x1080"
-extensions="(jpg|jpeg|png)"
+extensions="png"
 filesCount=$(ls -1 *."$extensions" | wc -l)
 
 echo "expanding $filesCount \*\.$extensions-files to $dimension"
