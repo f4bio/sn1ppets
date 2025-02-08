@@ -11,21 +11,22 @@ checkBin magick || errorMessage "This snippet requires imagemagick. Install it p
 
 filesDone=0
 dimension="1920x1080"
-extension="jpg"
-filesCount=$(ls -1 *."$extension" | wc -l)
+extensions="(jpg|jpeg|png)"
+filesCount=$(ls -1 *."$extensions" | wc -l)
 
-echo "expanding $filesCount \*\.$extension-files to $dimension"
+echo "expanding $filesCount \*\.$extensions-files to $dimension"
 mkdir -p ./_originals
 
-for currentFile in *."$extension"; do
+for currentFile in *."$extensions"; do
 	outFile="${currentFile%.*}-expanded"
+  outFileExtension="${currentFile##*.}"
 	echo "processing: $currentFile..."
 	magick \
 		-size "$dimension" xc:skyblue \
 		"$currentFile" -blur 0x25 -geometry "$dimension" -gravity northwest -composite \
 		"$currentFile" -geometry "$dimension" -blur 0x25 -gravity southeast -composite \
 		"$currentFile" -geometry "$dimension" -gravity center -composite \
-		"$outFile.$extension"
+		"$outFile.$outFileExtension"
 	filesDone=$((filesDone+1))
 	percentDone=$((filesDone/filesCount*100))
 	echo "$percentDone% done ($filesDone of $filesCount files)"
