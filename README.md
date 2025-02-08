@@ -42,6 +42,12 @@ curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/fix_permissions
 curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/init_project.sh | bash
 ```
 
+## blur_expand_image.sh
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/blur_expand_image.sh | sudo bash
+```
+
 ## asdf_install_all_latest.sh
 
 ```bash
