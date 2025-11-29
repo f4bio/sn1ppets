@@ -2,9 +2,6 @@
 
 command -v apt-get >/dev/null 2>&1 || { echo >&2 "This snippet requires apt-get. Install it please, and then run this tool again."; exit 1; }
 
-runDateTime=$(getFormattedDatetime '%Y-%m-%d-%H-%M-%S')
-echo "---" > /tmp/debian_package_upgrade.log
-echo "$runDateTime" >> /tmp/debian_package_upgrade.log
 echo "---" >> /tmp/debian_package_upgrade.log
 
 echo "Starting..."
