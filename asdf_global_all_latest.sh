@@ -1,16 +1,9 @@
 #!/bin/bash
 
-## script-commons:
-scriptsCommonUtilities=$(mktemp)
-curl -fsSL -o "$scriptsCommonUtilities" https://gitlab.com/bertrand-benoit/scripts-common/-/raw/master/utilities.sh
-. "$scriptsCommonUtilities"
-BSC_VERBOSE=1
-## :script-commons
+command -v awk >/dev/null 2>&1 || { echo >&2 "This snippet requires awk. Install it please, and then run this tool again."; exit 1; }
+command -v asdf >/dev/null 2>&1 || { echo >&2 "This snippet requires asdf. Install it please, and then run this tool again."; exit 1; }
 
-checkBin awk || errorMessage "This snippet requires awk. Install it please, and then run this tool again."
-checkBin asdf || errorMessage "This snippet requires asdf. Install it please, and then run this tool again."
-
-info "Starting..."
+echo "Starting..."
 
 pluginNames=$(asdf current | awk '{print $1, $8}')
 
@@ -18,4 +11,4 @@ for p in $pluginNames; do
     asdf global $p latest
 done
 
-info "All Done!"
+echo "All Done!"

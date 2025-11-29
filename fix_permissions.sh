@@ -1,42 +1,36 @@
 #!/bin/bash
 
-## script-commons:
-scriptsCommonUtilities=$(mktemp)
-curl -fsSL -o "$scriptsCommonUtilities" https://gitlab.com/bertrand-benoit/scripts-common/-/raw/master/utilities.sh
-. "$scriptsCommonUtilities"
-BSC_VERBOSE=1
-## :script-commons
+command -v find >/dev/null 2>&1 || { echo >&2 "This snippet requires find. Install it please, and then run this tool again."; exit 1; }
 
-checkBin find || errorMessage "This snippet requires find. Install it please, and then run this tool again."
 echo "" > /tmp/fix_permissions.log
 
-info "Starting..."
+echo "Starting..."
 
 export NEEDRESTART_MODE=a
 OWNER_USER_ID="${SUDO_UID:-1000}"
 OWNER_GROUP_ID="${SUDO_GID:-1000}"
 TARGET_DIR="${TARGET_DIR:-$(pwd)}"
 
-info "OWNER_USER_ID: ${OWNER_USER_ID}"
-info "OWNER_GROUP_ID: ${OWNER_GROUP_ID}"
-info "TARGET_DIR: ${TARGET_DIR}"
+echo "OWNER_USER_ID: ${OWNER_USER_ID}"
+echo "OWNER_GROUP_ID: ${OWNER_GROUP_ID}"
+echo "TARGET_DIR: ${TARGET_DIR}"
 
 # fdfind --type file --exec chmod o+r,g+r,u+rw >> /tmp/fix_permissions.log
-# debug "find $TARGET_DIR -type f -exec chmod o+rw,g+r,o+r "{}" \; >> /tmp/fix_permissions.log"
+# echo "find $TARGET_DIR -type f -exec chmod o+rw,g+r,o+r "{}" \; >> /tmp/fix_permissions.log"
 find $TARGET_DIR -type f -exec chmod o+rw,g+r,o+r "{}" \; >> /tmp/fix_permissions.log
-info "Files-644 Done... (1/4)"
+echo "Files-644 Done... (1/4)"
 
 # fdfind --type directory --exec chmod o+rx,g+rx,u+rwx >> /tmp/fix_permissions.log
-# debug "find $TARGET_DIR -type d -exec chmod 755 "{}" \; >> /tmp/fix_permissions.log"
+# echo "find $TARGET_DIR -type d -exec chmod 755 "{}" \; >> /tmp/fix_permissions.log"
 find $TARGET_DIR -type d -exec chmod 755 "{}" \; >> /tmp/fix_permissions.log
-info "Directories-755 Done... (2/4)"
+echo "Directories-755 Done... (2/4)"
 
-# debug "chown -R $OWNER_USER_ID:$OWNER_GROUP_ID $TARGET_DIR >> /tmp/fix_permissions.log"
+# echo "chown -R $OWNER_USER_ID:$OWNER_GROUP_ID $TARGET_DIR >> /tmp/fix_permissions.log"
 chown -R $OWNER_USER_ID:$OWNER_GROUP_ID $TARGET_DIR >> /tmp/fix_permissions.log
-info "Chown-R Done... (3/4)"
+echo "Chown-R Done... (3/4)"
 
-writeMessage "sync >> /tmp/fix_permissions.log"
+# echo "sync >> /tmp/fix_permissions.log"
 sync >> /tmp/fix_permissions.log
-info "Sync Done... (4/4)"
+echo "Sync Done... (4/4)"
 
-info "All Done!"
+echo "All Done!"
