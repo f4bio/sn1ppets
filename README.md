@@ -25,59 +25,59 @@
 ## debian_package_upgrade.sh
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/debian_package_upgrade.sh | sudo bash
+sudo bash <(curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/debian_package_upgrade.sh)
 ```
 
 ## debian_base-packages_install.sh
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/debian_base-packages_install.sh | sudo bash
+sudo bash <(curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/debian_base-packages_install.sh)
 ```
 
 ## fix_permissions.sh
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/fix_permissions.sh | sudo bash
+sudo bash <(curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/fix_permissions.sh)
 ```
 
 ## init_project.sh
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/init_project.sh | bash
+bash <(curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/init_project.sh)
 ```
 
 ## blur_expand_image.sh
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/blur_expand_image.sh | sudo bash
+sudo bash <(curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/blur_expand_image.sh)
 ```
 
 ## asdf_install_all_latest.sh
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/asdf_install_all_latest.sh | bash
+bash <(curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/asdf_install_all_latest.sh)
 ```
 
 ## asdf_global_all_latest.sh
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/asdf_global_all_latest.sh | bash
+bash <(curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/asdf_global_all_latest.sh)
 ```
 
 ## github_delete_workflow_runs.sh
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/github_delete_workflow_runs.sh | bash
+bash <(curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/github_delete_workflow_runs.sh)
 ```
 
 ## ufw_fetch_application-profile.sh
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/ufw_fetch_application-profiles.sh | bash
+bash <(curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/ufw_fetch_application-profiles.sh)
 ```
 
 ## extract highlights
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/extract_highlights.sh | bash -s 
+bash <(curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/extract_highlights.sh) "your_local_video.mp4"
 ```

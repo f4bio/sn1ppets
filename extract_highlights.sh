@@ -1,6 +1,7 @@
 #!/bin/bash
 
 command -v ffmpeg >/dev/null 2>&1 || { echo >&2 "This snippet requires ffmpeg. Install it please, and then run this tool again."; exit 1; }
+command -v ffprobe >/dev/null 2>&1 || { echo >&2 "This snippet requires ffprobe. Install it please, and then run this tool again."; exit 1; }
 
 # Check if at least 1 argument is provided
 if [ "$#" -lt 1 ]; then
@@ -109,4 +110,4 @@ rm -rf "$TEMP_DIR"
 ACTUAL_FINAL_DURATION=$((COUNTER * CLIP_DURATION))
 echo "Success! Processing complete."
 echo "🎬 Video saved as: $FINAL_OUTPUT ($ACTUAL_FINAL_DURATION seconds)"
-echo "🖼️  Animation saved as: $FINAL_WEBP"
+echo "🖼️ Animation saved as: $FINAL_WEBP"
