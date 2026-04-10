@@ -54,8 +54,11 @@ FINAL_TMP_WEBP="/tmp/${BASE_NAME}-highlights.webp"
 FINAL_TMP_CONCAT_WEBP="/tmp/${BASE_NAME}-concatsheet.webp"
 
 # Hardcoded temporary directory
-TEMP_DIR=$(mktemp --directory)
+TEMP_DIR=$(mktemp -d)
 TEMP_CONCAT_SHEET="$TEMP_DIR/temp_concatsheet.avif"
+
+# Set up cleanup trap
+trap "rm -rf '$TEMP_DIR'" EXIT
 
 # --- CONFIGURATION ---
 CLIP_DURATION=1          # Length of each extracted clip (in seconds)
@@ -65,9 +68,19 @@ OFFSET_PERCENT=5         # Percentage of video to skip at the start and end
 
 TARGET_CLIPS=$((MAX_FINAL_DURATION / CLIP_DURATION))
 
+if [ "$TARGET_CLIPS" -le 0 ]; then
+    echo "Error: Invalid target clips calculation."
+    exit 1
+fi
+
 # Check if input file exists
 if [ ! -f "$INPUT_FILE" ]; then
     echo "Error: Input file '$INPUT_FILE' not found!"
+    exit 1
+fi
+
+if [ ! -r "$INPUT_FILE" ]; then
+    echo "Error: Cannot read input file '$INPUT_FILE'."
     exit 1
 fi
 
@@ -114,7 +127,7 @@ draw_progress_bar() {
     # Create strings of spaces, then replace them with # and -
     printf -v filled_str "%${filled}s" ""
     printf -v empty_str "%${empty}s" ""
-    printf "\rDone: [${filled_str// /#}${empty_str// /-}] %d%%" "$percent"
+    printf "\r[${filled_str// /#}${empty_str// /-}] %d%%" "$percent"
 }
 
 # --- SCRIPT EXECUTION ---
@@ -126,11 +139,12 @@ fi
 
 CURRENT_TIME=$START_OFFSET
 COUNTER=0
-TOTAL_STEPS=$(( TARGET_CLIPS + 50 ))
+CLIP_COUNT=0
+TOTAL_STEPS=$(( TARGET_CLIPS + 4 ))
 
 # Step 1: Extract the clips
-while [ $CURRENT_TIME -lt $END_TIME ] && [ $COUNTER -lt $TARGET_CLIPS ]; do
-    PADDED_COUNTER=$(printf "%03d" $COUNTER)
+while [ $CURRENT_TIME -lt $END_TIME ] && [ $CLIP_COUNT -lt $TARGET_CLIPS ]; do
+    PADDED_COUNTER=$(printf "%03d" $CLIP_COUNT)
     CLIP_NAME="clip_${PADDED_COUNTER}.mp4"
     OUTPUT_FILE="${TEMP_DIR}/${CLIP_NAME}"
 
@@ -140,12 +154,13 @@ while [ $CURRENT_TIME -lt $END_TIME ] && [ $COUNTER -lt $TARGET_CLIPS ]; do
         draw_progress_bar "$COUNTER" "$TOTAL_STEPS"
     fi
 
-    ffmpeg -y -ss "$CURRENT_TIME" -i "$INPUT_FILE" -t "$CLIP_DURATION" -c:v libx264 -preset fast -c:a aac "$OUTPUT_FILE" -loglevel "$LOG_LEVEL"
+    ffmpeg -y -ss "$CURRENT_TIME" -i "$INPUT_FILE" -t "$CLIP_DURATION" -c:v libx264 -preset fast -c:a aac "$OUTPUT_FILE" -loglevel "$LOG_LEVEL" || { echo "Error: Failed to extract clip $PADDED_COUNTER."; exit 1; }
 
     echo "file '$CLIP_NAME'" >> "$CONCAT_LIST"
 
     CURRENT_TIME=$(( CURRENT_TIME + STEP ))
     COUNTER=$(( COUNTER + 1))
+    CLIP_COUNT=$(( CLIP_COUNT + 1))
 done
 
 # Print final 100% progress bar and clear the line if not in debug mode
@@ -156,8 +171,8 @@ fi
 
 # Step 2: Stitch the clips
 echo "Stitching clips into final MP4..."
-ffmpeg -y -f concat -safe 0 -i "$CONCAT_LIST" -c copy "$FINAL_TMP_OUTPUT" -loglevel "$LOG_LEVEL"
-COUNTER=$(( COUNTER + 10))
+ffmpeg -y -f concat -safe 0 -i "$CONCAT_LIST" -c copy "$FINAL_TMP_OUTPUT" -loglevel "$LOG_LEVEL" || { echo "Error: Failed to stitch clips."; exit 1; }
+COUNTER=$(( COUNTER + 1))
 if [ "$DEBUG" -eq 0 ]; then
     draw_progress_bar "$COUNTER" "$TOTAL_STEPS"
     echo "" 
@@ -165,8 +180,8 @@ fi
 
 # Step 3: Convert to WebP
 echo "Converting MP4 to animated WebP..."
-ffmpeg -y -i "$FINAL_TMP_OUTPUT" -vcodec libwebp -vf "fps=15,scale=800:-1:flags=lanczos" -lossless 0 -q:v 70 -loop 0 -an "$FINAL_TMP_WEBP" -loglevel "$LOG_LEVEL"
-COUNTER=$(( COUNTER + 10 ))
+ffmpeg -y -i "$FINAL_TMP_OUTPUT" -vcodec libwebp -vf "fps=15,scale=800:-1:flags=lanczos" -lossless 0 -q:v 70 -loop 0 -an "$FINAL_TMP_WEBP" -loglevel "$LOG_LEVEL" || { echo "Error: Failed to convert to WebP."; exit 1; }
+COUNTER=$(( COUNTER + 1 ))
 if [ "$DEBUG" -eq 0 ]; then
     draw_progress_bar "$COUNTER" "$TOTAL_STEPS"
     echo "" 
@@ -176,11 +191,11 @@ fi
 echo "Generating animated contact sheet..."
 # Updated: --capture-frames=40 applied below
 if [ "$DEBUG" -eq 1 ]; then
-    vimg vcs --columns=4 --number=24 --capture-height=300 --capture-frames=40 --ignore-start=10sec --ignore-end=10sec --output="$TEMP_CONCAT_SHEET" "$INPUT_FILE"
+    vimg vcs --columns=4 --number=24 --capture-height=300 --capture-frames=40 --ignore-start=${START_OFFSET}s --ignore-end=${END_OFFSET}s --output="$TEMP_CONCAT_SHEET" "$INPUT_FILE" || { echo "Error: Failed to generate contact sheet."; exit 1; }
 else
-    vimg vcs --columns=4 --number=24 --capture-height=300 --capture-frames=40 --ignore-start=10sec --ignore-end=10sec --output="$TEMP_CONCAT_SHEET" "$INPUT_FILE" > /dev/null 2>&1
+    vimg vcs --columns=4 --number=24 --capture-height=300 --capture-frames=40 --ignore-start=${START_OFFSET}s --ignore-end=${END_OFFSET}s --output="$TEMP_CONCAT_SHEET" "$INPUT_FILE" > /dev/null 2>&1 || { echo "Error: Failed to generate contact sheet."; exit 1; }
 fi
-COUNTER=$(( COUNTER + 20 ))
+COUNTER=$(( COUNTER + 1 ))
 if [ "$DEBUG" -eq 0 ]; then
     draw_progress_bar "$COUNTER" "$TOTAL_STEPS"
     echo "" 
@@ -188,8 +203,8 @@ fi
 
 # Step 5: Convert Concat Sheet to WebP
 echo "Converting contact sheet to WebP..."
-ffmpeg -y -i "$TEMP_CONCAT_SHEET" -vcodec libwebp -lossless 0 -q:v 70 -loop 0 "$FINAL_TMP_CONCAT_WEBP" -loglevel "$LOG_LEVEL"
-COUNTER=$(( COUNTER + 10 ))
+ffmpeg -y -i "$TEMP_CONCAT_SHEET" -vcodec libwebp -lossless 0 -q:v 70 -loop 0 "$FINAL_TMP_CONCAT_WEBP" -loglevel "$LOG_LEVEL" || { echo "Error: Failed to convert contact sheet to WebP."; exit 1; }
+COUNTER=$(( COUNTER + 1 ))
 if [ "$DEBUG" -eq 0 ]; then
     draw_progress_bar "$COUNTER" "$TOTAL_STEPS"
     echo "" 
@@ -198,14 +213,17 @@ fi
 # Step 6: Cleanup
 rm -rf "$TEMP_DIR"
 
-ACTUAL_FINAL_DURATION=$(( COUNTER * CLIP_DURATION ))
+ACTUAL_FINAL_DURATION=$(( CLIP_COUNT * CLIP_DURATION ))
 
 FINAL_OUTPUT="${BASE_NAME}-highlights.mp4"
 FINAL_WEBP="${BASE_NAME}-highlights.webp"
 FINAL_CONCAT_WEBP="${BASE_NAME}-concatsheet.webp"
 
+if [ -f "$FINAL_OUTPUT" ]; then echo "Warning: Overwriting existing $FINAL_OUTPUT"; fi
 mv "$FINAL_TMP_OUTPUT" "$FINAL_OUTPUT"
+if [ -f "$FINAL_WEBP" ]; then echo "Warning: Overwriting existing $FINAL_WEBP"; fi
 mv "$FINAL_TMP_WEBP" "$FINAL_WEBP"
+if [ -f "$FINAL_CONCAT_WEBP" ]; then echo "Warning: Overwriting existing $FINAL_CONCAT_WEBP"; fi
 mv "$FINAL_TMP_CONCAT_WEBP" "$FINAL_CONCAT_WEBP"
 
 echo "======================================"
