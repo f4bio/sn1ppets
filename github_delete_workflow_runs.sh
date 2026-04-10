@@ -1,13 +1,6 @@
 #!/bin/bash
 
-## script-commons:
-scriptsCommonUtilities=$(mktemp)
-curl -fsSL -o "$scriptsCommonUtilities" https://gitlab.com/bertrand-benoit/scripts-common/-/raw/master/utilities.sh
-. "$scriptsCommonUtilities"
-BSC_VERBOSE=1
-## :script-commons
-
-checkBin gh || errorMessage "This snippet requires github-cli. Install it please, and then run this tool again."
+command -v gh >/dev/null 2>&1 || { echo >&2 "This snippet requires github-cli. Install it please, and then run this tool again."; exit 1; }
 
 info "Starting..."
 

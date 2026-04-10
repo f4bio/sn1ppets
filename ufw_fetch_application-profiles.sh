@@ -1,15 +1,8 @@
 #!/bin/bash
 
-## script-commons:
-scriptsCommonUtilities=$(mktemp)
-curl -fsSL -o "$scriptsCommonUtilities" https://gitlab.com/bertrand-benoit/scripts-common/-/raw/master/utilities.sh
-. "$scriptsCommonUtilities"
-BSC_VERBOSE=1
-## :script-commons
+command -v curl >/dev/null 2>&1 || { echo >&2 "This snippet requires curl. Install it please, and then run this tool again."; exit 1; }
 
-checkBin curl || errorMessage "This snippet requires curl. Install it please, and then run this tool again."
-
-runDateTime=$(getFormattedDatetime '%Y-%m-%d-%H-%M-%S')
+runDateTime=$(date '+%Y-%m-%d-%H-%M-%S')
 echo "---" >/tmp/ufw_fetch_application-profile.sh.log
 echo "$runDateTime" >>/tmp/ufw_fetch_application-profile.log
 echo "---" >>/tmp/ufw_fetch_application-profile.log
@@ -85,10 +78,10 @@ profileNames=(
   "Yahoo"
 )
 
-for f in $profileNames; do
-    remoteUrl="https://raw.githubusercontent.com/f4bio/ufw-application-profiles/refs/heads/develop/applications.d/$f"
+for f in "${profileNames[@]}"; do
+  remoteUrl="https://raw.githubusercontent.com/f4bio/ufw-application-profiles/refs/heads/develop/applications.d/$f"
 
-    getURLContents $remoteUrl /etc/ufw/applications.d/$f
+  curl -fsSL -o /etc/ufw/applications.d/$f $remoteUrl
 done
 
 info "All Done!"

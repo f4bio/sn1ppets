@@ -1,14 +1,7 @@
 #!/bin/bash
 
-## script-commons:
-scriptsCommonUtilities=$(mktemp)
-curl -fsSL -o "$scriptsCommonUtilities" https://gitlab.com/bertrand-benoit/scripts-common/-/raw/master/utilities.sh
-source "$scriptsCommonUtilities"
-BSC_VERBOSE=1
-## :script-commons
-
-checkBin magick || errorMessage "This snippet requires imagemagick. Install it please, and then run this tool again."
-checkBin bc || errorMessage "This snippet requires bc. Install it please, and then run this tool again."
+command -v magick >/dev/null 2>&1 || { echo >&2 "This snippet requires imagemagick. Install it please, and then run this tool again."; exit 1; }
+command -v bc >/dev/null 2>&1 || { echo >&2 "This snippet requires bc. Install it please, and then run this tool again."; exit 1; }
 
 filesDone=0
 dimension="1920x1080"

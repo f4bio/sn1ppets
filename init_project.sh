@@ -1,13 +1,6 @@
 #!/bin/bash
 
-## script-commons:
-scriptsCommonUtilities=$(mktemp)
-curl -fsSL -o "$scriptsCommonUtilities" https://gitlab.com/bertrand-benoit/scripts-common/-/raw/master/utilities.sh
-. "$scriptsCommonUtilities"
-BSC_VERBOSE=1
-## :script-commons
-
-checkBin curl || errorMessage "This snippet requires curl. Install it please, and then run this tool again."
+command -v curl >/dev/null 2>&1 || { echo >&2 "This snippet requires curl. Install it please, and then run this tool again."; exit 1; }
 
 info "Starting..."
 
@@ -35,10 +28,10 @@ fileNames=(
 )
 
 for f in $fileNames; do
-    localName=$(echo "$f" | sed "s/^dot_/./g")
-    remoteUrl="https://raw.githubusercontent.com/f4bio/sn1ppets/main/assets/$f"
+  localName=$(echo "$f" | sed "s/^dot_/./g")
+  remoteUrl="https://raw.githubusercontent.com/f4bio/sn1ppets/main/assets/$f"
 
-    getURLContents $remoteUrl $localName
+  curl -fsSL -o "$localName" "$remoteUrl"
 done
 
 info "All Done!"

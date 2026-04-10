@@ -2,7 +2,6 @@
 
 lsblk -o NAME,SIZE,TYPE,MOUNTPOINT,FSTYPE,UUID
 
-
 mkdir /mnt/root
 mount /dev/md124 /mnt/root
 mount /dev/md125 /mnt/root/boot
