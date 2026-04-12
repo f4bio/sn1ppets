@@ -191,14 +191,14 @@ fi
 echo "Generating animated contact sheet..."
 # Updated: --capture-frames=40 applied below
 if [ "$DEBUG" -eq 1 ]; then
-    vimg vcs --columns=4 --number=24 --capture-height=300 --capture-frames=40 --ignore-start=${START_OFFSET}s --ignore-end=${END_OFFSET}s --output="$TEMP_CONCAT_SHEET" "$INPUT_FILE" || { echo "Error: Failed to generate contact sheet."; exit 1; }
+    vimg vcs --columns=4 --number=24 --capture-width=350 --capture-frames=40 --ignore-start=${START_OFFSET}s --ignore-end=${END_OFFSET}s --output="$TEMP_CONCAT_SHEET" "$INPUT_FILE" || { echo "Error: Failed to generate contact sheet."; exit 1; }
 else
-    vimg vcs --columns=4 --number=24 --capture-height=300 --capture-frames=40 --ignore-start=${START_OFFSET}s --ignore-end=${END_OFFSET}s --output="$TEMP_CONCAT_SHEET" "$INPUT_FILE" > /dev/null 2>&1 || { echo "Error: Failed to generate contact sheet."; exit 1; }
+    vimg vcs --columns=4 --number=24 --capture-width=350 --capture-frames=40 --ignore-start=${START_OFFSET}s --ignore-end=${END_OFFSET}s --output="$TEMP_CONCAT_SHEET" "$INPUT_FILE" > /dev/null 2>&1 || { echo "Error: Failed to generate contact sheet."; exit 1; }
 fi
 COUNTER=$(( COUNTER + 1 ))
 if [ "$DEBUG" -eq 0 ]; then
     draw_progress_bar "$COUNTER" "$TOTAL_STEPS"
-    echo "" 
+    echo ""
 fi
 
 # Step 5: Convert Concat Sheet to WebP

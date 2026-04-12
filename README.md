@@ -25,19 +25,19 @@
 ## debian_package_upgrade.sh
 
 ```bash
-sudo bash <(curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/debian_package_upgrade.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/debian_package_upgrade.sh)
 ```
 
 ## debian_base-packages_install.sh
 
 ```bash
-sudo bash <(curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/debian_base-packages_install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/debian_base-packages_install.sh)
 ```
 
 ## fix_permissions.sh
 
 ```bash
-sudo bash <(curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/fix_permissions.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/fix_permissions.sh)
 ```
 
 ## init_project.sh
@@ -49,7 +49,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/init_pro
 ## blur_expand_image.sh
 
 ```bash
-sudo bash <(curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/blur_expand_image.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/blur_expand_image.sh)
 ```
 
 ## asdf_install_all_latest.sh
