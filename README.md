@@ -25,13 +25,13 @@
 ## debian_package_upgrade.sh
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/debian_package_upgrade.sh)
+curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/debian_package_upgrade.sh | sudo bash
 ```
 
 ## debian_base-packages_install.sh
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/debian_base-packages_install.sh)
+curl -fsSL https://raw.githubusercontent.com/f4bio/sn1ppets/main/debian_base-packages_install.sh | sudo bash
 ```
 
 ## fix_permissions.sh
